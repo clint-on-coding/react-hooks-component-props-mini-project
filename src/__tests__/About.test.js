@@ -1,7 +1,8 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import About from "../components/About";
-import logo from "../assets/logo"
+const logo = "logo.png";
+
 
 test("renders a <aside> element", () => {
   const { container } = render(<About />);
@@ -12,7 +13,7 @@ test("renders a <img> with the blog logo and alt text of 'blog logo'", () => {
   render(<About image={logo} />);
   const img = screen.queryByAltText("blog logo");
   expect(img).toBeInTheDocument();
-  expect(img.src).toContain(logo);
+  expect(img.src).toMatch(/logo\.png$/); // ✅ safer check
 });
 
 test("uses a default value for the image if no image is passed as a prop", () => {
